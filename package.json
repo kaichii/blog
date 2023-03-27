@@ -1,0 +1,32 @@
+{
+  "name": "blog",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Blog using Notion as CMS.",
+  "homepage": "https://blog.kaichi.dev",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "blog",
+    "notion"
+  ],
+  "author": "kaichi <kaiichiiiii@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.2.4",
+    "notion-client": "^6.16.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/next": "^9.0.0",
+    "@types/react": "18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "5.0.2"
+  }
+}
