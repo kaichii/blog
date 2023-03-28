@@ -20,11 +20,16 @@
   "dependencies": {
     "next": "^13.2.4",
     "notion-client": "^6.16.0",
+    "notion-types": "^6.16.0",
+    "notion-utils": "^6.16.0",
+    "p-map": "^5.5.0",
+    "p-memoize": "^7.1.1",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-notion-x": "^6.16.0"
   },
   "devDependencies": {
-    "@types/next": "^9.0.0",
     "@types/react": "18.0.29",
     "@types/react-dom": "^18.0.11",
     "typescript": "5.0.2"
