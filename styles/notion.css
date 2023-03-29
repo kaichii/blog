@@ -1,0 +1,22 @@
+.notion {
+  --notion-header-height: 54px;
+}
+
+.notion-page-cover-wrapper {
+  padding: 0 8px;
+}
+
+.notion-page {
+  margin: 0 8px;
+}
+
+.notion-page-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notion-link {
+  color: inherit;
+  text-decoration: none;
+}

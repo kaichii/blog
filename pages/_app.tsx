@@ -1,8 +1,14 @@
 import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
+
 import 'react-notion-x/src/styles.css';
 import 'styles/global.css';
-import 'styles/prism-themes/prism-one-dark.css';
+import 'styles/notion.css';
 
 export default function APP({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
