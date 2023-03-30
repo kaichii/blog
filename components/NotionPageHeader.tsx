@@ -1,33 +1,30 @@
 import { navigationLinks, navigationStyle } from '@/lib/config';
 import clsx from 'clsx';
 import { CollectionViewPageBlock, PageBlock } from 'notion-types';
+import { memo } from 'react';
 import { Breadcrumbs, Header, useNotionContext } from 'react-notion-x';
-import ThemeSwitcher from './ThemeSwitcher';
-import styles from './styles.module.css';
 import SearchNotion from './SearchNotion';
-import { useMemo } from 'react';
-import { getPageBreadcrumbs } from 'notion-utils';
+import styles from './styles.module.css';
+import ThemeSwitcher from './ThemeSwitcher';
 
-function NotionPageHeader(block: CollectionViewPageBlock | PageBlock) {
-  const { components, recordMap, mapPageUrl } = useNotionContext();
-
-  console.log({ ...block }, { ...recordMap.block });
-
-  if (!block.id) return null;
+function NotionPageHeader({
+  block,
+}: {
+  block: CollectionViewPageBlock | PageBlock;
+}) {
+  const { components, mapPageUrl } = useNotionContext();
 
   if (navigationStyle === 'default') {
     return <Header block={block} />;
   }
 
-  console.log(recordMap.block, block);
-
   return (
     <header className='notion-header'>
       <div className='notion-nav-header'>
-        {/* <Breadcrumbs block={recordMap.block[block.id]} rootOnly /> */}
+        <Breadcrumbs block={block} rootOnly />
 
         <div className='notion-nav-header-rhs breadcrumbs'>
-          {/* <SearchNotion block={recordMap.block[block.id].value} /> */}
+          <SearchNotion block={block} />
           {navigationLinks
             ?.map((link) => {
               if (!link.pageId && !link.url) {
@@ -65,4 +62,4 @@ function NotionPageHeader(block: CollectionViewPageBlock | PageBlock) {
   );
 }
 
-export default NotionPageHeader;
+export default memo(NotionPageHeader);

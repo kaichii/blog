@@ -10,8 +10,8 @@ export default siteConfig({
   navigationLinks: [
     {
       pageId: 'f1199d37579b41cbabfc0b5174f4256a',
-      title: '关于我',
-      url: '/about-me',
+      title: '关于',
+      url: '/about',
     },
     {
       pageId: '6a29ebcb935a4f0689fe661ab5f3b8d1',

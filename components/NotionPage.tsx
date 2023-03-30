@@ -1,16 +1,16 @@
-import type { PageBlock, PageProps } from '@/lib/types';
-import { useEffect, useMemo, useState } from 'react';
-import { formatDate, NotionRenderer } from 'react-notion-x';
+import { site } from '@/lib/config';
+import type { PageProps } from '@/lib/types';
+import clsx from 'clsx';
+import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { site } from '@/lib/config';
-import Footer from './Footer';
 import { useRouter } from 'next/router';
-import NotionPageHeader from './NotionPageHeader';
-import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
+import { formatDate, NotionRenderer } from 'react-notion-x';
+import Footer from './Footer';
 import LoadingPage from './LoadingPage';
-import clsx from 'clsx';
+import NotionPageHeader from './NotionPageHeader';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -133,12 +133,12 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
       Pdf,
       Modal,
       // Tweet,
-      Header: null,
+      Header: NotionPageHeader,
       propertyLastEditedTimeValue,
       propertyTextValue,
       propertyDateValue,
     }),
-    []
+    [recordMap?.block[0]]
   );
 
   const keys = Object.keys(recordMap?.block || {});

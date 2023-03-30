@@ -1,3 +1,3 @@
 export default function LoadingPage() {
-  return <h2>Loading...</h2>;
+  return <p className='notion'>Loading...</p>;
 }
