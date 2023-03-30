@@ -1,12 +1,47 @@
+html {
+  --prism-foreground: #24292f;
+  --prism-background: #f6f8fa;
+  --prism-selection-background: #9fc6e9;
+  --prism-line-background: #eff1f3;
+  --prism-line-highlight-background: #fff8c5;
+  --prism-line-highlight-box-shadow-color: #eed888;
+  --prism-comment: #6e7781;
+  --prism-punctuation: var(--prism-foreground);
+  --prism-property: #0550ae;
+  --prism-selector: #0a3069;
+  --prism-operator: var(--prism-property);
+  --prism-keyword: #cf222e;
+  --prism-function: #8250df;
+  --prism-variable: var(--prism-selector);
+}
+
+html[data-theme='dark'] {
+  --prism-foreground: #ffffff;
+  --prism-background: #24292f;
+  --prism-selection-background: #27384e;
+  --prism-line-background: #8b949e;
+  --prism-line-highlight-background: #27384e;
+  --prism-line-highlight-box-shadow-color: #1f6fea;
+  --prism-comment: #8b949e;
+  --prism-punctuation: var(--prism-foreground);
+  --prism-property: #78bffe;
+  --prism-selector: #a5d6ff;
+  --prism-operator: #79bffe;
+  --prism-keyword: #ff7b72;
+  --prism-function: #d2a8ff;
+  --prism-variable: #fea557;
+  --prism-url-background: #24292f;
+}
+
 /**
- * Github Copilot theme for Prism.js
- * Based on Github: https://copilot.github.com
+ * Github Light theme for Prism.js
+ * Based on Github: https://github.com
  * @author Katorly
  */
 /* General */
 pre[class*='language-'],
 code[class*='language-'] {
-  color: #ffffff;
+  color: var(--prism-foreground);
   font-size: 13px;
   text-shadow: none;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -29,7 +64,7 @@ code[class*='language-']::selection,
 pre[class*='language-']::mozselection,
 code[class*='language-']::mozselection {
   text-shadow: none;
-  background: #27384e;
+  background: var(--prism-selection-background);
 }
 @media print {
   pre[class*='language-'],
@@ -41,13 +76,13 @@ pre[class*='language-'] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  background: #24292f;
+  background: var(--prism-background);
 }
 :not(pre) > code[class*='language-'] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
-  color: #ffffff;
-  background: #8b949e;
+  color: var(--prism-foreground);
+  background: var(--prism-line-background);
 }
 /* Line highlighting */
 pre[data-line] {
@@ -63,8 +98,8 @@ pre[class*='language-'] > code[class*='language-'] {
   right: 0;
   padding: inherit 0;
   margin-top: 1em;
-  background: #27384e;
-  box-shadow: inset 5px 0 0 #1f6fea;
+  background: var(--prism-line-highlight-background);
+  box-shadow: inset 5px 0 0 var(--prism-line-highlight-box-shadow-color);
   z-index: 0;
   pointer-events: none;
   line-height: inherit;
@@ -78,10 +113,10 @@ pre[class*='language-'] > code[class*='language-'] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #8b949e;
+  color: var(--prism-comment);
 }
 .token.punctuation {
-  color: #ffffff;
+  color: var(--prism-punctuation);
 }
 .token.property,
 .token.tag,
@@ -90,7 +125,7 @@ pre[class*='language-'] > code[class*='language-'] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #78bffe;
+  color: var(--prism-property);
 }
 .token.selector,
 .token.attr-name,
@@ -98,28 +133,28 @@ pre[class*='language-'] > code[class*='language-'] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: #a5d6ff;
+  color: var(--prism-selector);
 }
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #79bffe;
-  background: #24292f;
+  color: var(--prism-operator);
+  background: var(--prism-url-background);
 }
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #ff7b72;
+  color: var(--prism-keyword);
 }
 .token.function {
-  color: #d2a8ff;
+  color: var(--prism-function);
 }
 .token.regex,
 .token.important,
 .token.variable {
-  color: #fea557;
+  color: var(--prism-variable);
 }
 .token.important,
 .token.bold {

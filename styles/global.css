@@ -8,11 +8,6 @@ html {
   padding: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 [data-theme='dark'] [data-hide-on-theme='dark'],
 [data-theme='light'] [data-hide-on-theme='light'] {
   display: none;

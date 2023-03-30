@@ -27,8 +27,3 @@
 .notion-collection-card-property:not(:first-child) {
   text-overflow: ellipsis;
 }
-
-.notion-link {
-  color: inherit;
-  text-decoration: none;
-}
