@@ -3,6 +3,7 @@ import { parsePageId } from 'notion-utils';
 import { pageUrlAdditions, pageUrlOverrides, site } from './config';
 import { getSiteMap } from './get-site-map';
 import { getPage } from './notion';
+import { pageAcl } from './acl';
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let pageId: string;
@@ -43,9 +44,6 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     recordMap = await getPage(pageId);
   }
 
-  return {
-    site,
-    recordMap,
-    pageId,
-  };
+  const props = { site, recordMap, pageId };
+  return { ...props, ...(await pageAcl(props)) };
 }

@@ -1,4 +1,4 @@
-html {
+:root {
   --prism-foreground: #24292f;
   --prism-background: #f6f8fa;
   --prism-selection-background: #9fc6e9;
@@ -15,7 +15,7 @@ html {
   --prism-variable: var(--prism-selector);
 }
 
-html[data-theme='dark'] {
+[data-theme='dark']:root {
   --prism-foreground: #ffffff;
   --prism-background: #24292f;
   --prism-selection-background: #27384e;

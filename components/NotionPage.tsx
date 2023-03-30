@@ -1,4 +1,4 @@
-import type { PageProps } from '@/lib/types';
+import type { PageBlock, PageProps } from '@/lib/types';
 import { useEffect, useMemo, useState } from 'react';
 import { formatDate, NotionRenderer } from 'react-notion-x';
 import dynamic from 'next/dynamic';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import NotionPageHeader from './NotionPageHeader';
 import { useTheme } from 'next-themes';
 import LoadingPage from './LoadingPage';
+import clsx from 'clsx';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -120,13 +121,7 @@ const propertyTextValue = (
 export function NotionPage({ error, recordMap, pageId }: PageProps) {
   const router = useRouter();
 
-  const [mounted, setMounted] = useState(false);
-
   const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const components = useMemo(
     () => ({
@@ -138,7 +133,7 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
       Pdf,
       Modal,
       // Tweet,
-      Header: NotionPageHeader,
+      Header: null,
       propertyLastEditedTimeValue,
       propertyTextValue,
       propertyDateValue,
@@ -146,13 +141,12 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
     []
   );
 
+  const keys = Object.keys(recordMap?.block || {});
+  const block = recordMap?.block?.[keys[0]]?.value;
+
   const footer = useMemo(() => <Footer />, []);
 
   if (router.isFallback) return <LoadingPage />;
-
-  if (!mounted) {
-    return null;
-  }
 
   const isDarkMode = resolvedTheme === 'dark';
 
@@ -160,14 +154,14 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
     <>
       <NotionRenderer
         darkMode={isDarkMode}
-        bodyClassName={pageId === site.rootNotionPageId && 'index-page'}
+        bodyClassName={clsx({ 'index-page': pageId === site.rootNotionPageId })}
         recordMap={recordMap}
         fullPage
         components={components}
         rootDomain={site.domain}
         rootPageId={site.rootNotionPageId}
         showCollectionViewDropdown={false}
-        showTableOfContents
+        showTableOfContents={false}
         footer={footer}
       />
     </>

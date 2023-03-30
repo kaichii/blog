@@ -8,7 +8,7 @@ import 'styles/prism.css';
 
 export default function APP({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
+    <ThemeProvider defaultTheme='system'>
       <Component {...pageProps} />
     </ThemeProvider>
   );

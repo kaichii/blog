@@ -1,7 +1,6 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
-import clsx from 'clsx';
 
 function Sun() {
   return (
@@ -38,29 +37,29 @@ function Moon() {
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
 
-  const { resolvedTheme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
   return (
-    <span>
+    <span className={styles.toggleButtonWrapper}>
       <button
         data-hide-on-theme='light'
-        className={clsx(styles.toggleButton)}
-        onClick={() => setTheme('light')}
+        title='Switch to light mode'
+        aria-label='Switch to light mode'
+        className={styles.toggleButton}
+        onClick={() => (!mounted ? void 0 : setTheme('light'))}
       >
         <Sun />
       </button>
       <button
         data-hide-on-theme='dark'
+        title='Switch to dark mode'
+        aria-label='Switch to dark mode'
         className={styles.toggleButton}
-        onClick={() => setTheme('dark')}
+        onClick={() => (!mounted ? void 0 : setTheme('dark'))}
       >
         <Moon />
       </button>

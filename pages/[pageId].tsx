@@ -1,5 +1,6 @@
 import { NotionPage } from '@/components/NotionPage';
 import { domain, isDev } from '@/lib/config';
+import { getSiteMap } from '@/lib/get-site-map';
 import { resolveNotionPage } from '@/lib/resolve-notion-page';
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 
@@ -10,6 +11,19 @@ export async function getStaticPaths() {
       fallback: true,
     };
   }
+
+  const siteMap = await getSiteMap();
+
+  const staticPaths = {
+    paths: Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
+      params: {
+        pageId,
+      },
+    })),
+    fallback: true,
+  };
+
+  return staticPaths;
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

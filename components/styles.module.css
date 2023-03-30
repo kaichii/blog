@@ -1,12 +1,16 @@
 .footer {
   width: 100vw;
   height: 12rem;
-  background: #1a1a1a;
+  background: transparent;
+}
+
+.toggleButtonWrapper {
+  margin-inline-start: 0.5em;
 }
 
 .toggleButton {
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,4 +24,12 @@
 
 .toggleButton:hover {
   background: var(--bg-color-0);
+}
+
+.navLink {
+  /* font-weight: 500; */
+}
+
+.searchButton {
+  background: var(--notion-gray_background_co);
 }

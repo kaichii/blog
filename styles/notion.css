@@ -1,13 +1,42 @@
 .notion {
+  --notion-max-width: 720px;
   --notion-header-height: 54px;
+}
+
+.index-page {
+  --notion-max-width: 900px;
 }
 
 .notion > * {
   padding: 0;
 }
 
+.notion-header {
+  background-color: #ffffffcc;
+  backdrop-filter: saturate(180%) blur(16px);
+}
+
+.dark-mode .notion-header {
+  background-color: transparent;
+}
+
+.notion-header .breadcrumbs {
+  gap: 4px;
+}
+
+.notion-header .button {
+  padding: 8px 12px;
+}
+
 .notion-page-cover-wrapper {
-  padding: 0 8px;
+  padding: 0 10px;
+}
+
+.notion-page-cover-wrapper,
+.notion-page-cover-wrapper span,
+.notion-page-cover-wrapper img {
+  max-width: 1200px;
+  border-radius: 12px;
 }
 
 .notion-page {
@@ -26,4 +55,9 @@
 
 .notion-collection-card-property:not(:first-child) {
   text-overflow: ellipsis;
+}
+
+.notion-header .notion-nav-header {
+  max-width: 1200px;
+  margin: 0 auto;
 }
