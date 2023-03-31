@@ -1,5 +1,6 @@
+import { site } from '@/lib/config';
 import Link from 'next/link';
-import { Github, Twitter } from './Icons';
+import { Github, RSS, Twitter } from './Icons';
 import styles from './styles.module.css';
 
 export default function Footer() {
@@ -19,6 +20,13 @@ export default function Footer() {
           href='https://twitter.com/k41chi'
         >
           <Twitter />
+        </Link>
+        <Link
+          className={styles.footerLink}
+          target='_blank'
+          href={`https://${site.domain}/feed`}
+        >
+          <RSS />
         </Link>
       </div>
       <div className={styles.copyright}>
