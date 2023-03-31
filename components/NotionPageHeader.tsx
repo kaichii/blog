@@ -1,9 +1,11 @@
-import { navigationLinks, navigationStyle } from '@/lib/config';
+import {
+  isSearchEnabled,
+  navigationLinks,
+  navigationStyle,
+} from '@/lib/config';
 import clsx from 'clsx';
 import { CollectionViewPageBlock, PageBlock } from 'notion-types';
-import { memo } from 'react';
-import { Breadcrumbs, Header, useNotionContext } from 'react-notion-x';
-import SearchNotion from './SearchNotion';
+import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x';
 import styles from './styles.module.css';
 import ThemeSwitcher from './ThemeSwitcher';
 
@@ -22,9 +24,8 @@ function NotionPageHeader({
     <header className='notion-header'>
       <div className='notion-nav-header'>
         <Breadcrumbs block={block} rootOnly />
-
         <div className='notion-nav-header-rhs breadcrumbs'>
-          <SearchNotion block={block} />
+          {isSearchEnabled && <Search block={block} title='搜索' />}
           {navigationLinks
             ?.map((link) => {
               if (!link.pageId && !link.url) {
@@ -54,7 +55,6 @@ function NotionPageHeader({
               );
             })
             .filter(Boolean)}
-
           <ThemeSwitcher />
         </div>
       </div>
@@ -62,4 +62,4 @@ function NotionPageHeader({
   );
 }
 
-export default memo(NotionPageHeader);
+export default NotionPageHeader;

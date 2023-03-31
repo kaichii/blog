@@ -116,10 +116,21 @@ export const navigationLinks: Array<NavigationLink | null> = getSiteConfig(
   null
 );
 
+// Optional site search
+export const isSearchEnabled: boolean = getSiteConfig('isSearchEnabled', true);
+
 export const site: Site = {
   domain,
   name,
   rootNotionPageId,
   rootNotionSpaceId,
   description,
+};
+
+export const apiBaseUrl = `/api`;
+
+export const api = {
+  searchNotion: `${apiBaseUrl}/search-notion`,
+  getNotionPageInfo: `${apiBaseUrl}/notion-page-info`,
+  getSocialImage: `${apiBaseUrl}/social-image`,
 };

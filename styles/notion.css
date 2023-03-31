@@ -13,7 +13,7 @@
 
 .notion-header {
   background-color: #ffffffcc;
-  backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(12px);
 }
 
 .dark-mode .notion-header {
@@ -40,7 +40,9 @@
 }
 
 .notion-page {
-  margin: 0 8px;
+  margin: 0;
+  padding-left: calc(min(12px, 8vw));
+  padding-right: calc(min(12px, 8vw));
 }
 
 .notion-collection-card-cover {
@@ -60,4 +62,25 @@
 .notion-header .notion-nav-header {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.notion-text {
+  text-align: justify;
+}
+
+.searchInput {
+  color: var(--fg-color);
+  caret-color: var(--fg-color);
+}
+
+.notion-search .searchBar {
+  box-shadow: var(--fg-color-0) 0px 1px 0px;
+}
+
+.notion-search .noResults {
+  color: var(--fg-color-3);
+}
+
+.notion-search .noResultsDetail {
+  color: var(--fg-color-2);
 }

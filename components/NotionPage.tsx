@@ -11,6 +11,9 @@ import { formatDate, NotionRenderer } from 'react-notion-x';
 import Footer from './Footer';
 import LoadingPage from './LoadingPage';
 import NotionPageHeader from './NotionPageHeader';
+import { isSearchEnabled } from '@/lib/config';
+import { searchNotion } from '@/lib/search-notion';
+import BodyClassName from 'react-body-classname';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -112,7 +115,7 @@ const propertyTextValue = (
   defaultFn: () => React.ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
-    return <b>{defaultFn()}</b>;
+    return <b>text</b>;
   }
 
   return defaultFn();
@@ -152,6 +155,7 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
 
   return (
     <>
+      {isDarkMode && <BodyClassName className='dark-mode' />}
       <NotionRenderer
         darkMode={isDarkMode}
         bodyClassName={clsx({ 'index-page': pageId === site.rootNotionPageId })}
@@ -163,6 +167,7 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
         showCollectionViewDropdown={false}
         showTableOfContents={false}
         footer={footer}
+        searchNotion={isSearchEnabled ? searchNotion : null}
       />
     </>
   );

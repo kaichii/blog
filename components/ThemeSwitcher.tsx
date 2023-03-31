@@ -47,8 +47,8 @@ export default function ThemeSwitcher() {
     <span className={styles.toggleButtonWrapper}>
       <button
         data-hide-on-theme='light'
-        title='Switch to light mode'
-        aria-label='Switch to light mode'
+        title='切换主题（当前：dark）'
+        aria-label='切换主题（当前：dark）'
         className={styles.toggleButton}
         onClick={() => (!mounted ? void 0 : setTheme('light'))}
       >
@@ -56,8 +56,8 @@ export default function ThemeSwitcher() {
       </button>
       <button
         data-hide-on-theme='dark'
-        title='Switch to dark mode'
-        aria-label='Switch to dark mode'
+        title='切换主题（当前：light）'
+        aria-label='切换主题（当前：light）'
         className={styles.toggleButton}
         onClick={() => (!mounted ? void 0 : setTheme('dark'))}
       >

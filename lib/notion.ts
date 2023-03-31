@@ -41,8 +41,6 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
     // the page title, slug, etc.
     const navigationLinkRecordMaps = await getNavigationLinkPages();
 
-    console.log('cus', navigationLinkRecordMaps);
-
     if (navigationLinkRecordMaps?.length) {
       recordMap = navigationLinkRecordMaps.reduce(
         (map, navigationLinkRecordMap) =>
