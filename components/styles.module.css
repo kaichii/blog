@@ -1,9 +1,3 @@
-.footer {
-  width: 100vw;
-  height: 12rem;
-  background: transparent;
-}
-
 .toggleButtonWrapper {
   margin-inline-start: 0.5em;
 }
@@ -26,10 +20,39 @@
   background: var(--bg-color-0);
 }
 
-.navLink {
-  /* font-weight: 500; */
-}
-
 .searchButton {
   background: var(--notion-gray_background_co);
+}
+
+.footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 80%;
+  padding: 0.5em;
+  color: var(--fg-color-2);
+  font-weight: 500;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.footerLink {
+  color: var(--fg-color-6);
+  caret-color: var(--fg-color-6);
+}
+
+.footerLink:hover {
+  color: var(--fg-color);
+  caret-color: var(--fg-color);
 }
