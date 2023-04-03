@@ -39,6 +39,14 @@
   border-radius: 12px;
 }
 
+.notion-page-cover-wrapper,
+.notion-page-cover-wrapper span,
+.notion-page-cover-wrapper img {
+  height: min(30vh, 14em) !important;
+  min-height: min(30vh, 14em) !important;
+  max-height: min(30vh, 14em) !important;
+}
+
 .notion-page {
   margin: 0;
   padding-left: calc(min(12px, 8vw));

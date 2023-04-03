@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useMemo, ReactNode } from 'react';
 import { formatDate, NotionRenderer } from 'react-notion-x';
 import Footer from './Footer';
 import LoadingPage from './LoadingPage';
@@ -82,7 +82,7 @@ const Modal = dynamic(
 
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && block?.last_edited_time) {
     return `Last updated ${formatDate(block?.last_edited_time, {
@@ -95,7 +95,7 @@ const propertyLastEditedTimeValue = (
 
 const propertyDateValue = (
   { data, schema, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'published') {
     const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date;
@@ -112,10 +112,10 @@ const propertyDateValue = (
 
 const propertyTextValue = (
   { schema, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
-    return <b>text</b>;
+    return <b>{defaultFn()}</b>;
   }
 
   return defaultFn();
