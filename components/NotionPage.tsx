@@ -1,5 +1,11 @@
-import { site } from '@/lib/config';
-import type { PageProps } from '@/lib/types';
+import {
+  defaultPageCover,
+  description,
+  isDev,
+  isServer,
+  site,
+} from '@/lib/config';
+import type { PageBlock, PageProps } from '@/lib/types';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
@@ -14,6 +20,11 @@ import NotionPageHeader from './NotionPageHeader';
 import { isSearchEnabled } from '@/lib/config';
 import { searchNotion } from '@/lib/search-notion';
 import BodyClassName from 'react-body-classname';
+import { PageHead } from './PageHead';
+import { Page404 } from './Page404';
+import { getBlockTitle, getPageProperty } from 'notion-utils';
+import { getCanonicalPageUrl } from '@/lib/map-page-url';
+import { mapImageUrl } from '@/lib/map-image-url';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -151,10 +162,45 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
 
   if (router.isFallback) return <LoadingPage />;
 
+  if (error || !site || !block) {
+    return <Page404 site={site} pageId={pageId} error={error} />;
+  }
+
   const isDarkMode = resolvedTheme === 'dark';
+
+  const title = getBlockTitle(block, recordMap) || site.name;
+
+  if (!isServer) {
+    // add important objects to the window global for easy debugging
+    const g = window as any;
+    g.pageId = pageId;
+    g.recordMap = recordMap;
+    g.block = block;
+  }
+
+  const canonicalPageUrl =
+    !isDev && getCanonicalPageUrl(site, recordMap)(pageId);
+
+  const socialImage = mapImageUrl(
+    getPageProperty<string>('Social Image', block, recordMap) ||
+      (block as PageBlock).format?.page_cover ||
+      defaultPageCover,
+    block
+  );
+
+  const socialDescription =
+    getPageProperty<string>('Description', block, recordMap) || description;
 
   return (
     <>
+      <PageHead
+        pageId={pageId}
+        site={site}
+        title={title}
+        description={socialDescription}
+        image={socialImage}
+        url={canonicalPageUrl}
+      />
       {isDarkMode && <BodyClassName className='dark-mode' />}
       <NotionRenderer
         darkMode={isDarkMode}
