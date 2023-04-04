@@ -1,5 +1,5 @@
 import { parsePageId } from 'notion-utils';
-import { getSiteConfig } from './get-config-value';
+import { getEnv, getSiteConfig } from './get-config-value';
 import { NavigationLink } from './site-config';
 import {
   NavigationStyle,
@@ -127,6 +127,14 @@ export const site: Site = {
   description,
 };
 
+export const isServer = typeof window === 'undefined';
+
+export const port = getEnv('PORT', '3000');
+export const host = isDev ? `http://localhost:${port}` : `https://${domain}`;
+export const apiHost = isDev
+  ? host
+  : `https://${process.env.VERCEL_URL || domain}`;
+
 export const apiBaseUrl = `/api`;
 
 export const api = {
@@ -134,3 +142,16 @@ export const api = {
   getNotionPageInfo: `${apiBaseUrl}/notion-page-info`,
   getSocialImage: `${apiBaseUrl}/social-image`,
 };
+
+export const defaultPageIcon: string | null = getSiteConfig(
+  'defaultPageIcon',
+  null
+);
+export const defaultPageCover: string | null = getSiteConfig(
+  'defaultPageCover',
+  null
+);
+export const defaultPageCoverPosition: number = getSiteConfig(
+  'defaultPageCoverPosition',
+  0.5
+);

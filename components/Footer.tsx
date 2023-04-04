@@ -1,4 +1,4 @@
-import { site } from '@/lib/config';
+import { host, site } from '@/lib/config';
 import Link from 'next/link';
 import { Github, RSS, Twitter } from './Icons';
 import styles from './styles.module.css';
@@ -27,7 +27,7 @@ export default function Footer() {
         <Link
           className={styles.footerLink}
           target='_blank'
-          href={`https://${site.domain}/feed`}
+          href={`${host}/feed.xml`}
         >
           <RSS />
         </Link>
