@@ -12,3 +12,8 @@ html {
 [data-theme='light'] [data-hide-on-theme='light'] {
   display: none;
 }
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}

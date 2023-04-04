@@ -1,5 +1,7 @@
 import {
   defaultPageCover,
+  defaultPageCoverPosition,
+  defaultPageIcon,
   description,
   isDev,
   isServer,
@@ -22,9 +24,10 @@ import { searchNotion } from '@/lib/search-notion';
 import BodyClassName from 'react-body-classname';
 import { PageHead } from './PageHead';
 import { Page404 } from './Page404';
-import { getBlockTitle, getPageProperty } from 'notion-utils';
-import { getCanonicalPageUrl } from '@/lib/map-page-url';
+import { getBlockTitle, getPageProperty, normalizeTitle } from 'notion-utils';
+import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url';
 import { mapImageUrl } from '@/lib/map-image-url';
+import TweetEmbed from 'react-tweet-embed';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -91,6 +94,10 @@ const Modal = dynamic(
   }
 );
 
+const Tweet = ({ id }: { id: string }) => {
+  return <TweetEmbed tweetId={id} />;
+};
+
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
   defaultFn: () => ReactNode
@@ -132,6 +139,23 @@ const propertyTextValue = (
   return defaultFn();
 };
 
+const propertySelectValue = (
+  { schema, value, key, pageHeader },
+  defaultFn: () => React.ReactNode
+) => {
+  value = normalizeTitle(value);
+
+  if (pageHeader && schema.type === 'multi_select' && value) {
+    return (
+      <Link href={`/tags/${value}`} key={key}>
+        {defaultFn()}
+      </Link>
+    );
+  }
+
+  return defaultFn();
+};
+
 export function NotionPage({ error, recordMap, pageId }: PageProps) {
   const router = useRouter();
 
@@ -146,14 +170,22 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
       Equation,
       Pdf,
       Modal,
-      // Tweet,
+      Tweet,
       Header: NotionPageHeader,
       propertyLastEditedTimeValue,
       propertyTextValue,
       propertyDateValue,
+      propertySelectValue,
     }),
     [recordMap?.block[0]]
   );
+
+  const siteMapPageUrl = useMemo(() => {
+    const params: any = {};
+
+    const searchParams = new URLSearchParams(params);
+    return mapPageUrl(site, recordMap, searchParams);
+  }, [site, recordMap]);
 
   const keys = Object.keys(recordMap?.block || {});
   const block = recordMap?.block?.[keys[0]]?.value;
@@ -171,7 +203,6 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
   const title = getBlockTitle(block, recordMap) || site.name;
 
   if (!isServer) {
-    // add important objects to the window global for easy debugging
     const g = window as any;
     g.pageId = pageId;
     g.recordMap = recordMap;
@@ -214,6 +245,12 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
         showTableOfContents={false}
         footer={footer}
         searchNotion={isSearchEnabled ? searchNotion : null}
+        defaultPageCover={defaultPageCover}
+        defaultPageCoverPosition={defaultPageCoverPosition}
+        defaultPageIcon={defaultPageIcon}
+        mapImageUrl={mapImageUrl}
+        mapPageUrl={siteMapPageUrl}
+        previewImages={!!recordMap.preview_images}
       />
     </>
   );

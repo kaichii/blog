@@ -155,3 +155,8 @@ export const defaultPageCoverPosition: number = getSiteConfig(
   'defaultPageCoverPosition',
   0.5
 );
+
+export const isPreviewImageSupportEnabled: boolean = getSiteConfig(
+  'isPreviewImageSupportEnabled',
+  false
+);

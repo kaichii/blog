@@ -3,8 +3,13 @@ import { mergeRecordMaps } from 'notion-utils';
 import pMap from 'p-map';
 import pMemoize from 'p-memoize';
 
-import { navigationLinks, navigationStyle } from './config';
+import {
+  navigationLinks,
+  navigationStyle,
+  isPreviewImageSupportEnabled,
+} from './config';
 import { notion } from './notion-api';
+import { getPreviewImageMap } from './preview-images';
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -50,11 +55,10 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
     }
   }
 
-  // not support now
-  // if (isPreviewImageSupportEnabled) {
-  //   const previewImageMap = await getPreviewImageMap(recordMap);
-  //   (recordMap as any).preview_images = previewImageMap;
-  // }
+  if (isPreviewImageSupportEnabled) {
+    const previewImageMap = await getPreviewImageMap(recordMap);
+    (recordMap as any).preview_images = previewImageMap;
+  }
 
   return recordMap;
 }

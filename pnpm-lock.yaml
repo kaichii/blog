@@ -8,6 +8,7 @@ specifiers:
   clsx: ^1.2.1
   got: ^12.6.0
   isomorphic-unfetch: ^4.0.2
+  lodash.omit: ^4.5.0
   next: ^13.2.4
   next-themes: ^0.2.1
   notion-client: ^6.16.0
@@ -20,6 +21,7 @@ specifiers:
   react-body-classname: ^1.3.1
   react-dom: ^18.2.0
   react-notion-x: ^6.16.0
+  react-tweet-embed: ^2.0.0
   rss: ^1.2.2
   typescript: 5.0.2
 
@@ -28,6 +30,7 @@ dependencies:
   clsx: 1.2.1
   got: 12.6.0
   isomorphic-unfetch: 4.0.2
+  lodash.omit: 4.5.0
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   next-themes: 0.2.1_ld2jel3hspngo3u5lti2kgl2sq
   notion-client: 6.16.0
@@ -40,6 +43,7 @@ dependencies:
   react-body-classname: 1.3.1_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-notion-x: 6.16.0_fvjezdvjbvw5pcwwu5nvcubjfq
+  react-tweet-embed: 2.0.0_react@18.2.0
   rss: 1.2.2
 
 devDependencies:
@@ -1009,6 +1013,10 @@ packages:
       json5: 2.2.3
     dev: false
 
+  /lodash.omit/4.5.0:
+    resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    dev: false
+
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
@@ -1523,6 +1531,14 @@ packages:
     resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}
     peerDependencies:
       react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-tweet-embed/2.0.0_react@18.2.0:
+    resolution: {integrity: sha512-g2kfPjSRTOKeJtaQF5EMuSTmp/q8I0qdDs/pZ2qLXZjCWExDT/JgjxSlyM65NyNzsz8072PDpvlO/sIXwwVpdQ==}
+    peerDependencies:
+      react: '>=17'
     dependencies:
       react: 18.2.0
     dev: false
