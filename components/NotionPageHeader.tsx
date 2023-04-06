@@ -25,7 +25,12 @@ function NotionPageHeader({
       <div className='notion-nav-header'>
         <Breadcrumbs block={block} rootOnly />
         <div className='notion-nav-header-rhs breadcrumbs'>
-          {isSearchEnabled && <Search block={block} title='搜索' />}
+          {isSearchEnabled && (
+            <Search
+              block={block}
+              title={<p className={styles.navLink}>搜索</p>}
+            />
+          )}
           {navigationLinks
             ?.map((link) => {
               if (!link.pageId && !link.url) {

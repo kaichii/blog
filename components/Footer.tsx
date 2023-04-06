@@ -7,7 +7,9 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.copyright}>
-        <p>2019 - {new Date().getFullYear()} © KAI CHI.</p>
+        <p>
+          2019 - {new Date().getFullYear()} © <b>KAI CHI</b>.
+        </p>
       </div>
       <div className={styles.links}>
         <Link
