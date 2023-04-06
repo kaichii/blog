@@ -5,11 +5,10 @@ export default siteConfig({
   name: `kai's dev blog`,
   domain: 'kaichi.dev',
   author: 'kaichi',
-  isPreviewImageSupportEnabled: true,
   navigationStyle: 'custom',
   navigationLinks: [
     {
-      pageId: 'f1199d37579b41cbabfc0b5174f4256a',
+      pageId: '689537b0ba494fc4a550e4ce2fc56bda',
       title: '关于',
       url: '/about',
     },

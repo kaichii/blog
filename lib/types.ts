@@ -1,3 +1,4 @@
+import { ImageProps } from 'next/image';
 import { ExtendedRecordMap, PageMap } from 'notion-types';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -70,3 +71,20 @@ export interface NotionPageInfo {
   authorImage: string;
   detail: string;
 }
+
+export type NotionImageProps = Pick<
+  ImageProps,
+  | 'src'
+  | 'alt'
+  | 'width'
+  | 'height'
+  | 'className'
+  | 'blurDataURL'
+  | 'style'
+  | 'priority'
+  | 'onLoad'
+  | 'placeholder'
+  | 'objectFit'
+  | 'objectPosition'
+  | 'layout'
+>;

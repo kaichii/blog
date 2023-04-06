@@ -120,7 +120,7 @@ const propertyDateValue = (
 
     if (publishDate) {
       return `${formatDate(publishDate, {
-        month: 'long',
+        month: 'short',
       })}`;
     }
   }

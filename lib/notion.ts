@@ -3,13 +3,8 @@ import { mergeRecordMaps } from 'notion-utils';
 import pMap from 'p-map';
 import pMemoize from 'p-memoize';
 
-import {
-  navigationLinks,
-  navigationStyle,
-  isPreviewImageSupportEnabled,
-} from './config';
+import { navigationLinks, navigationStyle } from './config';
 import { notion } from './notion-api';
-import { getPreviewImageMap } from './preview-images';
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -41,9 +36,6 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   let recordMap = await notion.getPage(pageId);
 
   if (navigationStyle !== 'default') {
-    // ensure that any pages linked to in the custom navigation header have
-    // their block info fully resolved in the page record map so we know
-    // the page title, slug, etc.
     const navigationLinkRecordMaps = await getNavigationLinkPages();
 
     if (navigationLinkRecordMaps?.length) {
@@ -53,11 +45,6 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
         recordMap
       );
     }
-  }
-
-  if (isPreviewImageSupportEnabled) {
-    const previewImageMap = await getPreviewImageMap(recordMap);
-    (recordMap as any).preview_images = previewImageMap;
   }
 
   return recordMap;
