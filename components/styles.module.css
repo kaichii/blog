@@ -45,10 +45,6 @@
   background: var(--bg-color-0);
 }
 
-.searchButton {
-  background: var(--notion-gray_background_co);
-}
-
 .navLink {
   font-weight: 500;
 }

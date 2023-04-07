@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { domain, isDev, rootNotionPageId } from 'lib/config';
 import { resolveNotionPage } from 'lib/resolve-notion-page';
 import omit from 'lodash.omit';
@@ -7,10 +5,11 @@ import { ExtendedRecordMap } from 'notion-types';
 import { normalizeTitle } from 'notion-utils';
 
 import { NotionPage } from '@/components/NotionPage';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 
 const tagsPropertyNameLowerCase = 'tags';
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const rawTagName = (context.params.tagName as string) || '';
 
   try {
@@ -134,6 +133,8 @@ export async function getStaticPaths() {
   };
 }
 
-export default function NotionTagsPage(props) {
+export default function NotionTagsPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   return <NotionPage {...props} />;
 }

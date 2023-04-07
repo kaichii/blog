@@ -156,7 +156,13 @@ const propertySelectValue = (
   return defaultFn();
 };
 
-export function NotionPage({ error, recordMap, pageId }: PageProps) {
+export function NotionPage({
+  error,
+  recordMap,
+  pageId,
+  tagsPage,
+  propertyToFilterName,
+}: PageProps) {
   const router = useRouter();
 
   const { resolvedTheme } = useTheme();
@@ -200,7 +206,8 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
 
   const isDarkMode = resolvedTheme === 'dark';
 
-  const title = getBlockTitle(block, recordMap) || site.name;
+  const name = getBlockTitle(block, recordMap) || site.name;
+  const title = tagsPage && propertyToFilterName ? propertyToFilterName : name;
 
   if (!isServer) {
     const g = window as any;
@@ -235,7 +242,10 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
       {isDarkMode && <BodyClassName className='dark-mode' />}
       <NotionRenderer
         darkMode={isDarkMode}
-        bodyClassName={clsx({ 'index-page': pageId === site.rootNotionPageId })}
+        bodyClassName={clsx({
+          'index-page': pageId === site.rootNotionPageId,
+          'tags-page': tagsPage,
+        })}
         recordMap={recordMap}
         fullPage
         components={components}
@@ -251,6 +261,7 @@ export function NotionPage({ error, recordMap, pageId }: PageProps) {
         mapImageUrl={mapImageUrl}
         mapPageUrl={siteMapPageUrl}
         previewImages={!!recordMap.preview_images}
+        pageTitle={tagsPage && propertyToFilterName ? title : void 0}
       />
     </>
   );
