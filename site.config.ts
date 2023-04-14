@@ -4,10 +4,10 @@ export default siteConfig({
   rootNotionPageId: '54755ccc1a914a59806e07e532da3970',
   rootNotionSpaceId: 'a216946e-b6f5-43f3-9663-c762a0ac71d9',
   name: `kai's dev blog`,
-  domain: 'kaichi.dev',
+  domain: 'blog.kaichi.dev',
   author: 'kaichi',
-  defaultPageIcon: 'http://127.0.0.1:3000/page-icon.png',
-  defaultPageCover: 'http://127.0.0.1:3000/page-cover.jpg',
+  defaultPageIcon: 'https://blog.kaichi.dev/page-icon.png',
+  defaultPageCover: 'https://blog.kaichi.dev/page-cover.jpg',
   defaultPageCoverPosition: 0.5,
   navigationStyle: 'custom',
   navigationLinks: [
