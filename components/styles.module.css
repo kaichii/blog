@@ -23,6 +23,13 @@
     'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .toggleButtonWrapper {
   margin-inline-start: 0.5em;
 }
@@ -88,4 +95,9 @@
   width: 24px;
   height: 24px;
   color: rgba(55, 53, 47, 0.4);
+}
+
+.errorImage {
+  max-width: 100%;
+  object-fit: contain;
 }
