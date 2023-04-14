@@ -1,13 +1,7 @@
 import { NextRequest } from 'next/server';
-
 import { ImageResponse } from '@vercel/og';
-
 import { api, apiHost, rootNotionPageId } from '@/lib/config';
 import { NotionPageInfo } from '@/lib/types';
-
-const smileySansFont = fetch(
-  new URL('../../public/fonts/SmileySans-Oblique.ttf', import.meta.url)
-).then((res) => res.arrayBuffer());
 
 export const config = {
   runtime: 'edge',
@@ -30,122 +24,114 @@ export default async function OGImage(req: NextRequest) {
   if (!pageInfoRes.ok) {
     return new Response(pageInfoRes.statusText, { status: pageInfoRes.status });
   }
+
   const pageInfo: NotionPageInfo = await pageInfoRes.json();
   console.log(pageInfo);
 
-  const [smileySans] = await Promise.all([smileySansFont]);
+  function Tag({ children }) {
+    return (
+      <span
+        style={{
+          fontSize: 16,
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          background: 'black',
+          color: 'white',
+          padding: '6px 12px',
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
 
   return new ImageResponse(
     (
       <div
+        lang='zh-CN'
         style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          backgroundColor: '#1F2027',
+          height: '100%',
+          width: '100%',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: '"Smiley Sans", sans-serif',
-          color: 'black',
+          letterSpacing: '-.02em',
+          fontWeight: 700,
+          background: 'white',
+          fontFamily: 'Inter, "Material Icons"',
         }}
       >
-        {pageInfo.image && (
-          <img
-            src={pageInfo.image}
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          />
-        )}
-
         <div
           style={{
-            position: 'relative',
-            width: 900,
-            height: 465,
+            left: 42,
+            top: 42,
+            position: 'absolute',
             display: 'flex',
-            flexDirection: 'column',
-            border: '16px solid rgba(0,0,0,0.3)',
-            borderRadius: 8,
-            zIndex: '1',
+            alignItems: 'center',
+            gap: 16,
           }}
         >
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-around',
-              backgroundColor: '#fff',
-              padding: 24,
-              alignItems: 'center',
-              textAlign: 'center',
-            }}
-          >
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0 }}>{pageInfo.detail}</div>
-            )}
-
-            <div
-              style={{
-                fontSize: 70,
-                fontWeight: 700,
-                fontFamily: 'Smiley Sans',
-              }}
-            >
-              {pageInfo.title}
-            </div>
-
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0.6 }}>
-                {pageInfo.detail}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {pageInfo.authorImage && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 47,
-              left: 104,
-              height: 128,
-              width: 128,
-              display: 'flex',
-              borderRadius: '50%',
-              border: '4px solid #fff',
-              zIndex: '5',
-            }}
-          >
+          {pageInfo.authorImage && (
             <img
               src={pageInfo.authorImage}
               style={{
-                width: '100%',
-                height: '100%',
+                width: 64,
+                height: 64,
+                borderRadius: '50%',
               }}
             />
+          )}
+
+          {pageInfo.author && (
+            <p
+              style={{
+                fontSize: 24,
+                letterSpacing: '0.1em',
+                fontWeight: 700,
+              }}
+            >
+              {pageInfo.author}
+            </p>
+          )}
+        </div>
+        {pageInfo.tags && (
+          <div
+            style={{
+              right: 0,
+              top: 56,
+              position: 'absolute',
+              display: 'flex',
+              gap: '0.5em',
+            }}
+          >
+            {pageInfo.tags.map((t) => (
+              <Tag key={t}># {t}</Tag>
+            ))}
           </div>
         )}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            padding: '30px 50px',
+            margin: '0',
+            fontSize: 36,
+            width: 'auto',
+            maxWidth: 700,
+            textAlign: 'center',
+            backgroundColor: 'black',
+            color: 'white',
+            lineHeight: 1.4,
+          }}
+        >
+          {pageInfo.title}
+        </div>
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: 'Smiley Sans',
-          data: smileySans,
-          style: 'normal',
-          weight: 400,
-        },
-      ],
+      width: 800,
+      height: 400,
     }
   );
 }
