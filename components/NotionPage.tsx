@@ -28,6 +28,7 @@ import { getBlockTitle, getPageProperty, normalizeTitle } from 'notion-utils';
 import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url';
 import { mapImageUrl } from '@/lib/map-image-url';
 import TweetEmbed from 'react-tweet-embed';
+import Giscus from '@giscus/react';
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
@@ -195,6 +196,10 @@ export function NotionPage({
 
   const keys = Object.keys(recordMap?.block || {});
   const block = recordMap?.block?.[keys[0]]?.value;
+  const isDarkMode = resolvedTheme === 'dark';
+
+  const isBlogPost =
+    block?.type === 'page' && block?.parent_table === 'collection'
 
   const footer = useMemo(() => <Footer />, []);
 
@@ -203,8 +208,6 @@ export function NotionPage({
   if (error || !site || !block) {
     return <Page404 site={site} pageId={pageId} error={error} />;
   }
-
-  const isDarkMode = resolvedTheme === 'dark';
 
   const name = getBlockTitle(block, recordMap) || site.name;
   const title = tagsPage && propertyToFilterName ? propertyToFilterName : name;
@@ -221,8 +224,8 @@ export function NotionPage({
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover ||
-      defaultPageCover,
+    (block as PageBlock).format?.page_cover ||
+    defaultPageCover,
     block
   );
 
@@ -262,6 +265,18 @@ export function NotionPage({
         mapPageUrl={siteMapPageUrl}
         previewImages={!!recordMap.preview_images}
         pageTitle={tagsPage && propertyToFilterName ? title : void 0}
+        pageAside={isBlogPost ? <Giscus
+          id='comments'
+          repo="kaichii/blog"
+          repoId="R_kgDOJOwG0A"
+          category="General"
+          categoryId="DIC_kwDOJOwG0M4CV8fK"
+          mapping="pathname"
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="top"
+          theme={isDarkMode ? 'dark_dimmed' : 'light'}
+          lang="zh-CN" loading='lazy' /> : void 0}
       />
     </>
   );
