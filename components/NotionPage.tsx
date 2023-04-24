@@ -34,37 +34,19 @@ const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then(async (m) => {
     // add / remove any prism syntaxes here
     await Promise.all([
-      import('prismjs/components/prism-markup-templating.js'),
-      import('prismjs/components/prism-markup.js'),
       import('prismjs/components/prism-bash.js'),
-      import('prismjs/components/prism-c.js'),
-      import('prismjs/components/prism-cpp.js'),
-      import('prismjs/components/prism-csharp.js'),
       import('prismjs/components/prism-docker.js'),
-      import('prismjs/components/prism-java.js'),
-      import('prismjs/components/prism-js-templates.js'),
-      import('prismjs/components/prism-coffeescript.js'),
       import('prismjs/components/prism-diff.js'),
       import('prismjs/components/prism-git.js'),
       import('prismjs/components/prism-go.js'),
       import('prismjs/components/prism-graphql.js'),
-      import('prismjs/components/prism-handlebars.js'),
-      import('prismjs/components/prism-less.js'),
-      import('prismjs/components/prism-makefile.js'),
       import('prismjs/components/prism-markdown.js'),
-      import('prismjs/components/prism-objectivec.js'),
-      import('prismjs/components/prism-ocaml.js'),
-      import('prismjs/components/prism-python.js'),
-      import('prismjs/components/prism-reason.js'),
       import('prismjs/components/prism-rust.js'),
-      import('prismjs/components/prism-sass.js'),
-      import('prismjs/components/prism-scss.js'),
-      import('prismjs/components/prism-solidity.js'),
-      import('prismjs/components/prism-sql.js'),
-      import('prismjs/components/prism-stylus.js'),
-      import('prismjs/components/prism-swift.js'),
-      import('prismjs/components/prism-wasm.js'),
-      import('prismjs/components/prism-yaml.js'),
+      import('prismjs/components/prism-css'),
+      import('prismjs/components/prism-cshtml'),
+      import('prismjs/components/prism-javascript'),
+      import('prismjs/components/prism-json'),
+      import('prismjs/components/prism-yaml'),
     ]);
     return m.Code;
   })
@@ -199,7 +181,7 @@ export function NotionPage({
   const isDarkMode = resolvedTheme === 'dark';
 
   const isBlogPost =
-    block?.type === 'page' && block?.parent_table === 'collection'
+    block?.type === 'page' && block?.parent_table === 'collection';
 
   const footer = useMemo(() => <Footer />, []);
 
@@ -224,8 +206,8 @@ export function NotionPage({
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-    (block as PageBlock).format?.page_cover ||
-    defaultPageCover,
+      (block as PageBlock).format?.page_cover ||
+      defaultPageCover,
     block
   );
 
@@ -265,18 +247,26 @@ export function NotionPage({
         mapPageUrl={siteMapPageUrl}
         previewImages={!!recordMap.preview_images}
         pageTitle={tagsPage && propertyToFilterName ? title : void 0}
-        pageAside={isBlogPost ? <Giscus
-          id='comments'
-          repo="kaichii/blog"
-          repoId="R_kgDOJOwG0A"
-          category="General"
-          categoryId="DIC_kwDOJOwG0M4CV8fK"
-          mapping="pathname"
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="top"
-          theme={isDarkMode ? 'dark_dimmed' : 'light'}
-          lang="zh-CN" loading='lazy' /> : void 0}
+        pageAside={
+          isBlogPost ? (
+            <Giscus
+              id='comments'
+              repo='kaichii/blog'
+              repoId='R_kgDOJOwG0A'
+              category='General'
+              categoryId='DIC_kwDOJOwG0M4CV8fK'
+              mapping='pathname'
+              reactionsEnabled='1'
+              emitMetadata='0'
+              inputPosition='top'
+              theme={isDarkMode ? 'dark_dimmed' : 'light'}
+              lang='zh-CN'
+              loading='lazy'
+            />
+          ) : (
+            void 0
+          )
+        }
       />
     </>
   );
