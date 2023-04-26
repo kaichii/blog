@@ -7,7 +7,7 @@
   --notion-max-width: 900px;
 }
 
-.notion > * {
+.notion>* {
   padding: 0;
 }
 
@@ -157,9 +157,7 @@
   filter: none;
 }
 
-[data-theme='dark']
-  .notion-collection-card:hover
-  .notion-collection-card-cover {
+[data-theme='dark'] .notion-collection-card:hover .notion-collection-card-cover {
   filter: brightness(120%);
 }
 
@@ -170,7 +168,7 @@
 /** display giscus in aside */
 .notion-page-content-has-aside {
   flex-direction: column;
-  width: fit-content;
+  width: 100%;
   row-gap: 6em;
 }
 
@@ -180,6 +178,6 @@
 }
 
 .notion-page-content-has-aside .notion-page-content-inner {
-  width: fit-content;
-  max-width: fit-content;
+  width: auto;
+  max-width: unset;
 }
