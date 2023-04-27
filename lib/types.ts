@@ -72,7 +72,7 @@ export interface NotionPageInfo {
   author: string;
   authorImage: string;
   detail: string;
-  tags: string[];
+  url: string;
 }
 
 export type NotionImageProps = Pick<

@@ -14,6 +14,7 @@ import * as libConfig from '@/lib/config';
 import { mapImageUrl } from '@/lib/map-image-url';
 import { notion } from '@/lib/notion-api';
 import { NotionPageInfo } from '@/lib/types';
+import { mapPageUrl } from '@/lib/map-page-url';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
@@ -49,6 +50,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const isBlogPost =
     block.type === 'page' && block.parent_table === 'collection';
   const title = getBlockTitle(block, recordMap) || libConfig.name;
+  const params: any = {};
+
+  const searchParams = new URLSearchParams(params);
+
+  const url = `${libConfig.domain}${
+    mapPageUrl(libConfig.site, recordMap, searchParams)(pageId) || ''
+  }`;
 
   const imageCoverPosition =
     (block as PageBlock).format?.page_cover_position ??
@@ -77,16 +85,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const author =
     getPageProperty<string>('Author', block, recordMap) || libConfig.author;
-  const tags = getPageProperty<string[]>('Tags', block, recordMap) || [];
 
   const publishedTime = getPageProperty<number>('Published', block, recordMap);
   const datePublished = publishedTime ? new Date(publishedTime) : undefined;
 
   const date =
     isBlogPost && datePublished
-      ? `${datePublished.toLocaleString('en-US', {
-          month: 'long',
-        })} ${datePublished.getFullYear()}`
+      ? `${datePublished.getFullYear()}-${(datePublished.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}-${datePublished
+          .getDate()
+          .toString()
+          .padStart(2, '0')}`
       : undefined;
 
   const detail = date || author || libConfig.domain;
@@ -99,7 +109,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     author,
     authorImage,
     detail,
-    tags,
+    url,
   };
 
   res.setHeader(
