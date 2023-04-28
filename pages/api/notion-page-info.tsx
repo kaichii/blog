@@ -49,7 +49,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const isBlogPost =
     block.type === 'page' && block.parent_table === 'collection';
-  const title = getBlockTitle(block, recordMap) || libConfig.name;
+  const title = isBlogPost
+    ? getBlockTitle(block, recordMap) || libConfig.name
+    : libConfig.name;
+
   const params: any = {};
 
   const searchParams = new URLSearchParams(params);

@@ -3,7 +3,7 @@ import { siteConfig } from './lib/site-config';
 export default siteConfig({
   rootNotionPageId: '54755ccc1a914a59806e07e532da3970',
   rootNotionSpaceId: 'a216946e-b6f5-43f3-9663-c762a0ac71d9',
-  name: `kai's dev blog`,
+  name: `Kai's Dev Blog`,
   domain: 'blog.kaichi.dev',
   author: 'kaichi',
   defaultPageIcon: 'https://blog.kaichi.dev/page-icon.png',

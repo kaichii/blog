@@ -131,7 +131,7 @@ export default async function OGImage(req: NextRequest) {
             }}
           >
             {pageInfo.title && (
-              <p style={{ fontSize: 48, textAlign: 'center' }}>
+              <p style={{ fontSize: 64, fontWeight: 500, textAlign: 'center' }}>
                 {pageInfo.title}
               </p>
             )}
