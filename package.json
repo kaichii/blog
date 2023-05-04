@@ -15,7 +15,7 @@
     "blog",
     "notion"
   ],
-  "author": "kaichi <kaiichiiiii@gmail.com>",
+  "author": "kaichi <contact@kaichi.dev>",
   "license": "MIT",
   "dependencies": {
     "@giscus/react": "^2.2.8",
@@ -25,6 +25,7 @@
     "got": "^12.6.0",
     "isomorphic-unfetch": "^4.0.2",
     "lodash.omit": "^4.5.0",
+    "lodash.remove": "^4.7.0",
     "next": "^13.2.4",
     "next-themes": "^0.2.1",
     "notion-client": "^6.16.0",
@@ -42,6 +43,8 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.2.4",
+    "@types/lodash.omit": "^4.5.7",
+    "@types/lodash.remove": "^4.7.7",
     "@types/react": "18.0.29",
     "@types/react-dom": "^18.0.11",
     "@types/rss": "^0.0.30",

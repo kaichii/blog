@@ -22,6 +22,9 @@ dependencies:
   lodash.omit:
     specifier: ^4.5.0
     version: 4.5.0
+  lodash.remove:
+    specifier: ^4.7.0
+    version: 4.7.0
   next:
     specifier: ^13.2.4
     version: 13.2.4(react-dom@18.2.0)(react@18.2.0)
@@ -69,6 +72,12 @@ devDependencies:
   '@next/bundle-analyzer':
     specifier: ^13.2.4
     version: 13.2.4
+  '@types/lodash.omit':
+    specifier: ^4.5.7
+    version: 4.5.7
+  '@types/lodash.remove':
+    specifier: ^4.7.7
+    version: 4.7.7
   '@types/react':
     specifier: 18.0.29
     version: 18.0.29
@@ -386,6 +395,22 @@ packages:
     dependencies:
       '@types/node': 18.15.11
     dev: false
+
+  /@types/lodash.omit@4.5.7:
+    resolution: {integrity: sha512-6q6cNg0tQ6oTWjSM+BcYMBhan54P/gLqBldG4AuXd3nKr0oeVekWNS4VrNEu3BhCSDXtGapi7zjhnna0s03KpA==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: true
+
+  /@types/lodash.remove@4.7.7:
+    resolution: {integrity: sha512-jZrQtY6zdukkFFinY+yxikzU3hCS6SEXsTy103Ao+2YsZq2H+D/NpXuAoZpcpn7BTMBUsgr2NO7l4UYHxKXXjw==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: true
+
+  /@types/lodash@4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
+    dev: true
 
   /@types/node@18.15.11:
     resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
@@ -1164,6 +1189,10 @@ packages:
 
   /lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    dev: false
+
+  /lodash.remove@4.7.0:
+    resolution: {integrity: sha512-GnwkSsEXGXirSxh3YI+jc/qvptE2DV8ZjA4liK0NT1MJ3mNDMFhX3bY+4Wr8onlNItYuPp7/4u19Fi55mvzkTw==}
     dev: false
 
   /lodash@4.17.21:
