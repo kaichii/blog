@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   for (const pagePath of Object.keys(siteMap.canonicalPageMap)) {
     const pageId = siteMap.canonicalPageMap[pagePath];
     const recordMap = siteMap.pageMap[pageId] as ExtendedRecordMap;
-    console.log(recordMap);
+ 
     if (!recordMap) continue;
 
     const keys = Object.keys(recordMap?.block || {});
@@ -66,7 +66,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       recordMap
     );
 
-    if (!publishedTime) continue;
+    const isPublic = getPageProperty<boolean>(
+      'Public',
+      block,
+      recordMap
+    );
+
+    if (!isPublic) continue;
 
     const date = new Date(publishedTime);
 

@@ -18,9 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const block = results.recordMap?.block?.[item.id]?.value;
 
-    const publishedTime = getPageProperty<number>('Published', block, results.recordMap as types.ExtendedRecordMap);
+    const isPublic = getPageProperty<boolean>('Public', block, results.recordMap as types.ExtendedRecordMap);
 
-    if (!publishedTime) remove(results.results, (result) => result.id === item.id);
+    if (!isPublic) remove(results.results, (result) => result.id === item.id);
   })
 
   res.setHeader(
