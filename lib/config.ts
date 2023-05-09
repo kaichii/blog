@@ -160,3 +160,10 @@ export const isPreviewImageSupportEnabled: boolean = getSiteConfig(
   'isPreviewImageSupportEnabled',
   false
 );
+
+
+export const isRedisEnabled: boolean =
+  getSiteConfig('isRedisEnabled', false) || !!getEnv('REDIS_ENABLED', null);
+
+export const redisHost: string | null = getEnv('UPSTASH_REDIS_REST_URL', null);
+export const redisToken: string | null = getEnv('UPSTASH_REDIS_REST_TOKEN', null);

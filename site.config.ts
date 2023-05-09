@@ -18,4 +18,6 @@ export default siteConfig({
     },
   ],
   isSearchEnabled: true,
+  isRedisEnabled: true,
+  isPreviewImageSupportEnabled: true
 });
