@@ -35,10 +35,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     ttl: ttlMinutes,
   });
 
+  const pages: Array<[string, number]> = [];
+
   for (const pagePath of Object.keys(siteMap.canonicalPageMap)) {
     const pageId = siteMap.canonicalPageMap[pagePath];
     const recordMap = siteMap.pageMap[pageId] as ExtendedRecordMap;
- 
+
     if (!recordMap) continue;
 
     const keys = Object.keys(recordMap?.block || {});
@@ -50,21 +52,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       block.type === 'page' &&
       block.parent_table === 'collection' &&
       parentPage?.id === idToUuid(config.rootNotionPageId);
-    if (!isBlogPost) {
-      continue;
-    }
-
-    const title = getBlockTitle(block, recordMap) || config.name;
-    const description =
-      getPageProperty<string>('Description', block, recordMap) ||
-      config.description;
-    const url = getCanonicalPageUrl(config.site, recordMap)(pageId);
-
-    const publishedTime = getPageProperty<number>(
-      'Published',
-      block,
-      recordMap
-    );
 
     const isPublic = getPageProperty<boolean>(
       'Public',
@@ -72,9 +59,32 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       recordMap
     );
 
-    if (!isPublic) continue;
+    if (!isBlogPost || !isPublic) continue;
 
-    const date = new Date(publishedTime);
+    const publishedTime = getPageProperty<number>(
+      'Published',
+      block,
+      recordMap
+    );
+
+    pages.push([pageId, publishedTime]);
+  }
+
+  pages.sort(([, date1], [, date2]) => date2 - date1)
+
+  for (const [pageId, pubDate] of pages) {
+    const recordMap = siteMap.pageMap[pageId] as ExtendedRecordMap;
+
+    const keys = Object.keys(recordMap?.block || {});
+    const block = recordMap?.block?.[keys[0]]?.value;
+
+    const title = getBlockTitle(block, recordMap) || config.name;
+    const description =
+      getPageProperty<string>('Description', block, recordMap) ||
+      config.description;
+    const url = getCanonicalPageUrl(config.site, recordMap)(pageId);
+
+    const date = new Date(pubDate);
 
     const socialImageUrl = getSocialImageUrl(pageId);
 
@@ -85,9 +95,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       description,
       enclosure: socialImageUrl
         ? {
-            url: socialImageUrl,
-            type: 'image/jpeg',
-          }
+          url: socialImageUrl,
+          type: 'image/jpeg',
+        }
         : undefined,
       custom_elements: [
         {
