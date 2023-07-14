@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  notion-client@6.16.0:
+    hash: akvlwmqduzngul76vntcr6jsqa
+    path: patches/notion-client@6.16.0.patch
+
 dependencies:
   '@giscus/react':
     specifier: ^2.2.8
@@ -43,7 +48,7 @@ dependencies:
     version: 0.2.1(next@13.2.4)(react-dom@18.2.0)(react@18.2.0)
   notion-client:
     specifier: ^6.16.0
-    version: 6.16.0
+    version: 6.16.0(patch_hash=akvlwmqduzngul76vntcr6jsqa)
   notion-types:
     specifier: ^6.16.0
     version: 6.16.0
@@ -1596,7 +1601,7 @@ packages:
     engines: {node: '>=14.16'}
     dev: false
 
-  /notion-client@6.16.0:
+  /notion-client@6.16.0(patch_hash=akvlwmqduzngul76vntcr6jsqa):
     resolution: {integrity: sha512-gI2kPpls8XxJfXt7cs2JDmSHPZL1HkkXQnE5YWKPT4OnpiniUgHk5b+rRB2dXUqGT4003vSYmPnxXUTbzKPoLA==}
     engines: {node: '>=12'}
     dependencies:
@@ -1605,6 +1610,7 @@ packages:
       notion-utils: 6.16.0
       p-map: 5.5.0
     dev: false
+    patched: true
 
   /notion-types@6.16.0:
     resolution: {integrity: sha512-Cv83GaAczx57q1qsnuG8DHOuOb63c83u9LX2IainG5aqBEB0GUuLZ4DUQfB6MaXt+FMY9fO+KTgPeZWwX9hbrQ==}

@@ -1,11 +1,15 @@
-import { ExtendedRecordMap, SearchParams, SearchResults } from 'notion-types';
-import { mergeRecordMaps } from 'notion-utils';
-import pMap from 'p-map';
-import pMemoize from 'p-memoize';
+import { ExtendedRecordMap, SearchParams, SearchResults } from "notion-types";
+import { mergeRecordMaps } from "notion-utils";
+import pMap from "p-map";
+import pMemoize from "p-memoize";
 
-import { isPreviewImageSupportEnabled, navigationLinks, navigationStyle } from './config';
-import { notion } from './notion-api';
-import { getPreviewImageMap } from './preview-images';
+import {
+  isPreviewImageSupportEnabled,
+  navigationLinks,
+  navigationStyle,
+} from "./config";
+import { notion } from "./notion-api";
+import { getPreviewImageMap } from "./preview-images";
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -13,7 +17,7 @@ const getNavigationLinkPages = pMemoize(
       .map((link) => link.pageId)
       .filter(Boolean);
 
-    if (navigationStyle !== 'default' && navigationLinkPageIds.length) {
+    if (navigationStyle !== "default" && navigationLinkPageIds.length) {
       return pMap(
         navigationLinkPageIds,
         async (navigationLinkPageId) =>
@@ -36,7 +40,7 @@ const getNavigationLinkPages = pMemoize(
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   let recordMap = await notion.getPage(pageId);
 
-  if (navigationStyle !== 'default') {
+  if (navigationStyle !== "default") {
     const navigationLinkRecordMaps = await getNavigationLinkPages();
 
     if (navigationLinkRecordMaps?.length) {
@@ -49,10 +53,9 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   }
 
   if (isPreviewImageSupportEnabled) {
-    const previewImageMap = await getPreviewImageMap(recordMap)
-    ;(recordMap as any).preview_images = previewImageMap
+    const previewImageMap = await getPreviewImageMap(recordMap);
+    (recordMap as any).preview_images = previewImageMap;
   }
-
 
   return recordMap;
 }

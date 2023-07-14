@@ -54,5 +54,10 @@
   },
   "prettier": {
     "trailingComma": "es5"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "notion-client@6.16.0": "patches/notion-client@6.16.0.patch"
+    }
   }
 }
