@@ -5,6 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 module.exports = withBundleAnalyzer({
   staticPageGenerationTimeout: 300,
+  transpilePackages: ["react-tweet"],
   images: {
     domains: [
       "www.notion.so",

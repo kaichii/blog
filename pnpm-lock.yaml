@@ -76,9 +76,9 @@ dependencies:
   react-notion-x:
     specifier: ^6.16.0
     version: 6.16.0(@babel/runtime@7.21.0)(react-dom@18.2.0)(react@18.2.0)(webpack@5.78.0)
-  react-tweet-embed:
-    specifier: ^2.0.0
-    version: 2.0.0(react@18.2.0)
+  react-tweet:
+    specifier: ^3.0.3
+    version: 3.0.3(react-dom@18.2.0)(react@18.2.0)
   rss:
     specifier: ^1.2.2
     version: 1.2.2
@@ -348,6 +348,12 @@ packages:
 
   /@swc/helpers@0.4.14:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
+    dependencies:
+      tslib: 2.5.0
+    dev: false
+
+  /@swc/helpers@0.5.1:
+    resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.5.0
     dev: false
@@ -881,6 +887,13 @@ packages:
   /data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
+    dev: false
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.21.0
     dev: false
 
   /decompress-response@6.0.0:
@@ -1939,12 +1952,18 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-tweet-embed@2.0.0(react@18.2.0):
-    resolution: {integrity: sha512-g2kfPjSRTOKeJtaQF5EMuSTmp/q8I0qdDs/pZ2qLXZjCWExDT/JgjxSlyM65NyNzsz8072PDpvlO/sIXwwVpdQ==}
+  /react-tweet@3.0.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-dKPpCCGGo07hV8QtOthAwVbG/VfDA22kg5ny53UHnYYMR18gv7hDYiT9ZjMS4hWLzEObz++e616Sf4qLo9hhag==}
     peerDependencies:
-      react: '>=17'
+      react: '>= 18.0.0'
+      react-dom: '>= 18.0.0'
     dependencies:
+      '@swc/helpers': 0.5.1
+      clsx: 1.2.1
+      date-fns: 2.30.0
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.0(react@18.2.0)
     dev: false
 
   /react-universal-interface@0.6.2(react@18.2.0)(tslib@2.5.0):
@@ -2236,6 +2255,15 @@ packages:
       has-flag: 4.0.0
     dev: false
 
+  /swr@2.2.0(react@18.2.0):
+    resolution: {integrity: sha512-AjqHOv2lAhkuUdIiBu9xbuettzAzWXmCEcLONNKJRba87WAefz8Ca9d6ds/SzrPc235n1IxWYdhJ2zF3MNUaoQ==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
   /tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -2381,6 +2409,14 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.3.0
+    dev: false
+
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /util-deprecate@1.0.2:
