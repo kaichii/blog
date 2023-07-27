@@ -14,7 +14,7 @@ import dynamic from "next/dynamic";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, ReactNode } from "react";
+import { useMemo, ReactNode, useState, useEffect } from "react";
 import { formatDate, NotionRenderer } from "react-notion-x";
 import Footer from "./Footer";
 import LoadingPage from "./LoadingPage";
@@ -143,8 +143,15 @@ export function NotionPage({
   propertyToFilterName,
 }: PageProps) {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
 
   const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+
+    return () => setMounted(false);
+  }, []);
 
   const components = useMemo(
     () => ({
@@ -222,7 +229,7 @@ export function NotionPage({
       />
       {isDarkMode && <BodyClassName className="dark-mode" />}
       <NotionRenderer
-        darkMode={isDarkMode}
+        darkMode={mounted && isDarkMode}
         bodyClassName={clsx({
           "index-page": pageId === site.rootNotionPageId,
           "tags-page": tagsPage,
@@ -244,7 +251,7 @@ export function NotionPage({
         previewImages={!!recordMap.preview_images}
         pageTitle={tagsPage && propertyToFilterName ? title : void 0}
         pageAside={
-          isBlogPost ? (
+          mounted && isBlogPost ? (
             <Giscus
               id="comments"
               repo="kaichii/blog"
@@ -260,7 +267,7 @@ export function NotionPage({
               loading="lazy"
             />
           ) : (
-            void 0
+            false
           )
         }
       />
