@@ -227,7 +227,7 @@ export function NotionPage({
         image={socialImage}
         url={canonicalPageUrl}
       />
-      {isDarkMode && <BodyClassName className="dark-mode" />}
+      {isDarkMode && <BodyClassName className='dark-mode' />}
       <NotionRenderer
         darkMode={mounted && isDarkMode}
         bodyClassName={clsx({
@@ -253,18 +253,18 @@ export function NotionPage({
         pageAside={
           mounted && isBlogPost ? (
             <Giscus
-              id="comments"
-              repo="kaichii/blog"
-              repoId="R_kgDOJOwG0A"
-              category="General"
-              categoryId="DIC_kwDOJOwG0M4CV8fK"
-              mapping="pathname"
-              reactionsEnabled="1"
-              emitMetadata="0"
-              inputPosition="top"
+              id='comments'
+              repo='kaichii/blog'
+              repoId='R_kgDOJOwG0A'
+              category='General'
+              categoryId='DIC_kwDOJOwG0M4CV8fK'
+              mapping='pathname'
+              reactionsEnabled='1'
+              emitMetadata='0'
+              inputPosition='top'
               theme={isDarkMode ? "dark_dimmed" : "light"}
-              lang="zh-CN"
-              loading="lazy"
+              lang='zh-CN'
+              loading='lazy'
             />
           ) : (
             false

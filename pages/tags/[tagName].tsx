@@ -1,16 +1,16 @@
-import { domain, isDev, rootNotionPageId } from 'lib/config';
-import { resolveNotionPage } from 'lib/resolve-notion-page';
-import omit from 'lodash.omit';
-import { ExtendedRecordMap } from 'notion-types';
-import { normalizeTitle } from 'notion-utils';
+import { domain, isDev, rootNotionPageId } from "lib/config";
+import { resolveNotionPage } from "lib/resolve-notion-page";
+import omit from "lodash.omit";
+import { ExtendedRecordMap } from "notion-types";
+import { normalizeTitle } from "notion-utils";
 
-import { NotionPage } from '@/components/NotionPage';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { NotionPage } from "@/components/NotionPage";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 
-const tagsPropertyNameLowerCase = 'tags';
+const tagsPropertyNameLowerCase = "tags";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const rawTagName = (context.params.tagName as string) || '';
+  const rawTagName = (context.params.tagName as string) || "";
 
   try {
     const props = await resolveNotionPage(domain, rootNotionPageId);
@@ -22,13 +22,13 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
       if (collection) {
         const galleryView = Object.values(recordMap.collection_view).find(
-          (view) => view.value?.type === 'gallery'
+          (view) => view.value?.type === "gallery"
         )?.value;
 
         if (galleryView) {
           const galleryBlock = Object.values(recordMap.block).find(
             (block) =>
-              block.value?.type === 'collection_view' &&
+              block.value?.type === "collection_view" &&
               block.value.view_ids?.includes(galleryView.id)
           );
 
@@ -65,7 +65,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
                     return false;
                   }
 
-                  const values = value.split(',');
+                  const values = value.split(",");
                   if (
                     !values.find(
                       (value: string) => normalizeTitle(value) === filteredValue
@@ -92,7 +92,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       revalidate: 10,
     };
   } catch (err) {
-    console.error('page error', domain, rawTagName, err);
+    console.error("page error", domain, rawTagName, err);
 
     // we don't want to publish the error version of this page, so
     // let next.js know explicitly that incremental SSG failed

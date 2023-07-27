@@ -2,12 +2,12 @@ import {
   isSearchEnabled,
   navigationLinks,
   navigationStyle,
-} from '@/lib/config';
-import clsx from 'clsx';
-import { CollectionViewPageBlock, PageBlock } from 'notion-types';
-import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x';
-import styles from './styles.module.css';
-import ThemeSwitcher from './ThemeSwitcher';
+} from "@/lib/config";
+import clsx from "clsx";
+import { CollectionViewPageBlock, PageBlock } from "notion-types";
+import { Breadcrumbs, Header, Search, useNotionContext } from "react-notion-x";
+import styles from "./styles.module.css";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 function NotionPageHeader({
   block,
@@ -16,7 +16,7 @@ function NotionPageHeader({
 }) {
   const { components, mapPageUrl } = useNotionContext();
 
-  if (navigationStyle === 'default') {
+  if (navigationStyle === "default") {
     return <Header block={block} />;
   }
 
@@ -42,7 +42,7 @@ function NotionPageHeader({
                   <components.PageLink
                     href={mapPageUrl(link.pageId)}
                     key={link.pageId}
-                    className={clsx('breadcrumb button', styles.navLink)}
+                    className={clsx("breadcrumb button", styles.navLink)}
                   >
                     {link.title}
                   </components.PageLink>
@@ -53,7 +53,7 @@ function NotionPageHeader({
                 <components.Link
                   href={link.url}
                   key={link.url}
-                  className={clsx('breadcrumb button', styles.navLink)}
+                  className={clsx("breadcrumb button", styles.navLink)}
                 >
                   {link.title}
                 </components.Link>

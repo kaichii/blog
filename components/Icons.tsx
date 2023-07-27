@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { HTMLAttributes } from 'react';
-import styles from './styles.module.css';
+import clsx from "clsx";
+import { HTMLAttributes } from "react";
+import styles from "./styles.module.css";
 
 export function Sun() {
   return (

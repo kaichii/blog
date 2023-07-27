@@ -1,12 +1,12 @@
-import type { GetServerSideProps } from 'next';
+import type { GetServerSideProps } from "next";
 
-import { host } from '@/lib/config';
+import { host } from "@/lib/config";
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  if (req.method !== 'GET') {
+  if (req.method !== "GET") {
     res.statusCode = 405;
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify({ error: 'method not allowed' }));
+    res.setHeader("Content-Type", "application/json");
+    res.write(JSON.stringify({ error: "method not allowed" }));
     res.end();
 
     return {
@@ -15,11 +15,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   }
 
   // cache for up to one day
-  res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
-  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader("Cache-Control", "public, max-age=86400, immutable");
+  res.setHeader("Content-Type", "text/plain");
 
   // only allow the site to be crawlable on the production deployment
-  if (process.env.VERCEL_ENV === 'production') {
+  if (process.env.VERCEL_ENV === "production") {
     res.write(`User-agent: *
 Allow: /
 Disallow: /api/get-tweet-ast/*

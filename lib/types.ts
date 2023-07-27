@@ -1,10 +1,10 @@
-import { ImageProps } from 'next/image';
-import { ExtendedRecordMap, PageMap } from 'notion-types';
-import { ParsedUrlQuery } from 'querystring';
+import { ImageProps } from "next/image";
+import { ExtendedRecordMap, PageMap } from "notion-types";
+import { ParsedUrlQuery } from "querystring";
 
-export * from 'notion-types';
+export * from "notion-types";
 
-export type NavigationStyle = 'default' | 'custom';
+export type NavigationStyle = "default" | "custom";
 
 export interface PageError {
   message?: string;
@@ -77,17 +77,17 @@ export interface NotionPageInfo {
 
 export type NotionImageProps = Pick<
   ImageProps,
-  | 'src'
-  | 'alt'
-  | 'width'
-  | 'height'
-  | 'className'
-  | 'blurDataURL'
-  | 'style'
-  | 'priority'
-  | 'onLoad'
-  | 'placeholder'
-  | 'objectFit'
-  | 'objectPosition'
-  | 'layout'
+  | "src"
+  | "alt"
+  | "width"
+  | "height"
+  | "className"
+  | "blurDataURL"
+  | "style"
+  | "priority"
+  | "onLoad"
+  | "placeholder"
+  | "objectFit"
+  | "objectPosition"
+  | "layout"
 >;

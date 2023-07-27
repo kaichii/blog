@@ -1,15 +1,15 @@
-import { parsePageId } from 'notion-utils';
-import { getEnv, getSiteConfig } from './get-config-value';
-import { NavigationLink } from './site-config';
+import { parsePageId } from "notion-utils";
+import { getEnv, getSiteConfig } from "./get-config-value";
+import { NavigationLink } from "./site-config";
 import {
   NavigationStyle,
   PageUrlOverridesInverseMap,
   PageUrlOverridesMap,
   Site,
-} from './types';
+} from "./types";
 
 export const rootNotionPageId: string = parsePageId(
-  getSiteConfig('rootNotionPageId'),
+  getSiteConfig("rootNotionPageId"),
   { uuid: false }
 );
 
@@ -18,39 +18,39 @@ if (!rootNotionPageId) {
 }
 
 export const rootNotionSpaceId: string | null = parsePageId(
-  getSiteConfig('rootNotionSpaceId', null),
+  getSiteConfig("rootNotionSpaceId", null),
   { uuid: true }
 );
 
 export const pageUrlOverrides = cleanPageUrlMap(
-  getSiteConfig('pageUrlOverrides', {}) || {},
-  { label: 'pageUrlOverrides' }
+  getSiteConfig("pageUrlOverrides", {}) || {},
+  { label: "pageUrlOverrides" }
 );
 
 export const pageUrlAdditions = cleanPageUrlMap(
-  getSiteConfig('pageUrlAdditions', {}) || {},
-  { label: 'pageUrlAdditions' }
+  getSiteConfig("pageUrlAdditions", {}) || {},
+  { label: "pageUrlAdditions" }
 );
 
 export const inversePageUrlOverrides = invertPageUrlOverrides(pageUrlOverrides);
 
-export const environment = process.env.NODE_ENV || 'development';
-export const isDev = environment === 'development';
+export const environment = process.env.NODE_ENV || "development";
+export const isDev = environment === "development";
 
 // general site config
-export const name: string = getSiteConfig('name');
-export const author: string = getSiteConfig('author');
-export const domain: string = getSiteConfig('domain');
-export const description: string = getSiteConfig('description', 'Notion Blog');
-export const language: string = getSiteConfig('language', 'en');
+export const name: string = getSiteConfig("name");
+export const author: string = getSiteConfig("author");
+export const domain: string = getSiteConfig("domain");
+export const description: string = getSiteConfig("description", "Notion Blog");
+export const language: string = getSiteConfig("language", "en");
 
 // social accounts
-export const twitter: string | null = getSiteConfig('twitter', null);
-export const mastodon: string | null = getSiteConfig('mastodon', null);
-export const github: string | null = getSiteConfig('github', null);
-export const youtube: string | null = getSiteConfig('youtube', null);
-export const linkedin: string | null = getSiteConfig('linkedin', null);
-export const newsletter: string | null = getSiteConfig('newsletter', null);
+export const twitter: string | null = getSiteConfig("twitter", null);
+export const mastodon: string | null = getSiteConfig("mastodon", null);
+export const github: string | null = getSiteConfig("github", null);
+export const youtube: string | null = getSiteConfig("youtube", null);
+export const linkedin: string | null = getSiteConfig("linkedin", null);
+export const newsletter: string | null = getSiteConfig("newsletter", null);
 
 function cleanPageUrlMap(
   pageUrlMap: PageUrlOverridesMap,
@@ -72,7 +72,7 @@ function cleanPageUrlMap(
       throw new Error(`Missing ${label} value for page "${pageId}"`);
     }
 
-    if (!uri.startsWith('/')) {
+    if (!uri.startsWith("/")) {
       throw new Error(
         `Invalid ${label} value for page "${pageId}": value "${uri}" should be a relative URI that starts with "/"`
       );
@@ -102,22 +102,22 @@ function invertPageUrlOverrides(
 
 // Optional whether or not to include the Notion ID in page URLs or just use slugs
 export const includeNotionIdInUrls: boolean = getSiteConfig(
-  'includeNotionIdInUrls',
+  "includeNotionIdInUrls",
   !!isDev
 );
 
 export const navigationStyle: NavigationStyle = getSiteConfig(
-  'navigationStyle',
-  'default'
+  "navigationStyle",
+  "default"
 );
 
 export const navigationLinks: Array<NavigationLink | null> = getSiteConfig(
-  'navigationLinks',
+  "navigationLinks",
   null
 );
 
 // Optional site search
-export const isSearchEnabled: boolean = getSiteConfig('isSearchEnabled', true);
+export const isSearchEnabled: boolean = getSiteConfig("isSearchEnabled", true);
 
 export const site: Site = {
   domain,
@@ -127,9 +127,9 @@ export const site: Site = {
   description,
 };
 
-export const isServer = typeof window === 'undefined';
+export const isServer = typeof window === "undefined";
 
-export const port = getEnv('PORT', '3000');
+export const port = getEnv("PORT", "3000");
 export const host = isDev ? `http://localhost:${port}` : `https://${domain}`;
 export const apiHost = isDev
   ? host
@@ -144,26 +144,28 @@ export const api = {
 };
 
 export const defaultPageIcon: string | null = getSiteConfig(
-  'defaultPageIcon',
+  "defaultPageIcon",
   null
 );
 export const defaultPageCover: string | null = getSiteConfig(
-  'defaultPageCover',
+  "defaultPageCover",
   null
 );
 export const defaultPageCoverPosition: number = getSiteConfig(
-  'defaultPageCoverPosition',
+  "defaultPageCoverPosition",
   0.5
 );
 
 export const isPreviewImageSupportEnabled: boolean = getSiteConfig(
-  'isPreviewImageSupportEnabled',
+  "isPreviewImageSupportEnabled",
   false
 );
 
-
 export const isRedisEnabled: boolean =
-  getSiteConfig('isRedisEnabled', false) || !!getEnv('REDIS_ENABLED', null);
+  getSiteConfig("isRedisEnabled", false) || !!getEnv("REDIS_ENABLED", null);
 
-export const redisHost: string | null = getEnv('UPSTASH_REDIS_REST_URL', null);
-export const redisToken: string | null = getEnv('UPSTASH_REDIS_REST_TOKEN', null);
+export const redisHost: string | null = getEnv("UPSTASH_REDIS_REST_URL", null);
+export const redisToken: string | null = getEnv(
+  "UPSTASH_REDIS_REST_TOKEN",
+  null
+);

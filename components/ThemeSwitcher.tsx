@@ -1,7 +1,7 @@
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Moon, Sun } from './Icons';
-import styles from './styles.module.css';
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Moon, Sun } from "./Icons";
+import styles from "./styles.module.css";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -19,7 +19,7 @@ export default function ThemeSwitcher() {
         title='切换主题（当前：dark）'
         aria-label='切换主题（当前：dark）'
         className={styles.toggleButton}
-        onClick={() => (!mounted ? void 0 : setTheme('light'))}
+        onClick={() => (!mounted ? void 0 : setTheme("light"))}
       >
         <Sun />
       </button>
@@ -28,7 +28,7 @@ export default function ThemeSwitcher() {
         title='切换主题（当前：light）'
         aria-label='切换主题（当前：light）'
         className={styles.toggleButton}
-        onClick={() => (!mounted ? void 0 : setTheme('dark'))}
+        onClick={() => (!mounted ? void 0 : setTheme("dark"))}
       >
         <Moon />
       </button>

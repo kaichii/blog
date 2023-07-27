@@ -8,8 +8,8 @@ html {
   padding: 0;
 }
 
-[data-theme='dark'] [data-hide-on-theme='dark'],
-[data-theme='light'] [data-hide-on-theme='light'] {
+[data-theme="dark"] [data-hide-on-theme="dark"],
+[data-theme="light"] [data-hide-on-theme="light"] {
   display: none;
 }
 

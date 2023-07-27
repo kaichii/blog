@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "keywords": [
     "blog",
@@ -50,14 +51,23 @@
     "@types/react": "18.0.29",
     "@types/react-dom": "^18.0.11",
     "@types/rss": "^0.0.30",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "3.0.0",
     "typescript": "5.0.2"
   },
   "prettier": {
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "singleQuote": false,
+    "semi": true,
+    "jsxSingleQuote": true
   },
   "pnpm": {
     "patchedDependencies": {
       "notion-client@6.16.0": "patches/notion-client@6.16.0.patch"
     }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

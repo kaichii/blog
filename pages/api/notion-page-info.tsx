@@ -1,29 +1,29 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
-import got from 'got';
-import { PageBlock } from 'notion-types';
+import got from "got";
+import { PageBlock } from "notion-types";
 import {
   getBlockIcon,
   getBlockTitle,
   getPageProperty,
   isUrl,
   parsePageId,
-} from 'notion-utils';
+} from "notion-utils";
 
-import * as libConfig from '@/lib/config';
-import { mapImageUrl } from '@/lib/map-image-url';
-import { notion } from '@/lib/notion-api';
-import { NotionPageInfo } from '@/lib/types';
-import { mapPageUrl } from '@/lib/map-page-url';
+import * as libConfig from "@/lib/config";
+import { mapImageUrl } from "@/lib/map-image-url";
+import { notion } from "@/lib/notion-api";
+import { NotionPageInfo } from "@/lib/types";
+import { mapPageUrl } from "@/lib/map-page-url";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'POST') {
-    return res.status(405).send({ error: 'method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).send({ error: "method not allowed" });
   }
 
   const pageId: string = parsePageId(req.body.pageId);
   if (!pageId) {
-    throw new Error('Invalid notion page id');
+    throw new Error("Invalid notion page id");
   }
 
   const recordMap = await notion.getPage(pageId);
@@ -32,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const block = recordMap?.block?.[keys[0]]?.value;
 
   if (!block) {
-    throw new Error('Invalid recordMap for page');
+    throw new Error("Invalid recordMap for page");
   }
 
   const blockSpaceId = block.space_id;
@@ -48,7 +48,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const isBlogPost =
-    block.type === 'page' && block.parent_table === 'collection';
+    block.type === "page" && block.parent_table === "collection";
   const title = isBlogPost
     ? getBlockTitle(block, recordMap) || libConfig.name
     : libConfig.name;
@@ -58,7 +58,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const searchParams = new URLSearchParams(params);
 
   const url = `${libConfig.domain}${
-    mapPageUrl(libConfig.site, recordMap, searchParams)(pageId) || ''
+    mapPageUrl(libConfig.site, recordMap, searchParams)(pageId) || ""
   }`;
 
   const imageCoverPosition =
@@ -69,7 +69,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     : null;
 
   const imageBlockUrl = mapImageUrl(
-    getPageProperty<string>('Social Image', block, recordMap) ||
+    getPageProperty<string>("Social Image", block, recordMap) ||
       (block as PageBlock).format?.page_cover,
     block
   );
@@ -87,19 +87,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   ]);
 
   const author =
-    getPageProperty<string>('Author', block, recordMap) || libConfig.author;
+    getPageProperty<string>("Author", block, recordMap) || libConfig.author;
 
-  const publishedTime = getPageProperty<number>('Published', block, recordMap);
+  const publishedTime = getPageProperty<number>("Published", block, recordMap);
   const datePublished = publishedTime ? new Date(publishedTime) : undefined;
 
   const date =
     isBlogPost && datePublished
       ? `${datePublished.getFullYear()}-${(datePublished.getMonth() + 1)
           .toString()
-          .padStart(2, '0')}-${datePublished
+          .padStart(2, "0")}-${datePublished
           .getDate()
           .toString()
-          .padStart(2, '0')}`
+          .padStart(2, "0")}`
       : undefined;
 
   const detail = date || author || libConfig.domain;
@@ -116,8 +116,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=3600, max-age=3600, stale-while-revalidate=3600'
+    "Cache-Control",
+    "public, s-maxage=3600, max-age=3600, stale-while-revalidate=3600"
   );
   res.status(200).json(pageInfo);
 };
@@ -144,10 +144,10 @@ async function getCompatibleImageUrl(
   if (image) {
     const imageUrl = new URL(image);
 
-    if (imageUrl.host === 'images.unsplash.com') {
-      if (!imageUrl.searchParams.has('w')) {
-        imageUrl.searchParams.set('w', '1200');
-        imageUrl.searchParams.set('fit', 'max');
+    if (imageUrl.host === "images.unsplash.com") {
+      if (!imageUrl.searchParams.has("w")) {
+        imageUrl.searchParams.set("w", "1200");
+        imageUrl.searchParams.set("fit", "max");
         return imageUrl.toString();
       }
     }

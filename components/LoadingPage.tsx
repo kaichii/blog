@@ -1,5 +1,5 @@
-import { LoadingIcon } from './Icons';
-import styles from './styles.module.css';
+import { LoadingIcon } from "./Icons";
+import styles from "./styles.module.css";
 
 export default function LoadingPage() {
   return (

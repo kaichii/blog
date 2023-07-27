@@ -45,7 +45,7 @@ export default async function OGImage(req: NextRequest) {
   return new ImageResponse(
     (
       <div
-        lang="zh-CN"
+        lang='zh-CN'
         style={{
           display: "flex",
           position: "relative",
@@ -78,9 +78,9 @@ export default async function OGImage(req: NextRequest) {
               width: "100%",
             }}
           >
-            <Circle color="#fe5e57" />
-            <Circle color="#febc2e" />
-            <Circle color="#29c740" />
+            <Circle color='#fe5e57' />
+            <Circle color='#febc2e' />
+            <Circle color='#29c740' />
             <div
               style={{
                 display: "flex",

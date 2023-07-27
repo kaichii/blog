@@ -15,7 +15,7 @@
   --prism-variable: var(--prism-selector);
 }
 
-[data-theme='dark']:root {
+[data-theme="dark"]:root {
   --prism-foreground: #ffffff;
   --prism-background: #24292f;
   --prism-selection-background: #27384e;
@@ -33,18 +33,12 @@
   --prism-url-background: #24292f;
 }
 
-/**
- * Github Light theme for Prism.js
- * Based on Github: https://github.com
- * @author Katorly
- */
-/* General */
-pre[class*='language-'],
-code[class*='language-'] {
+pre[class*="language-"],
+code[class*="language-"] {
   color: var(--prism-foreground);
-  font-size: 13px;
+  font-size: 1em;
   text-shadow: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -59,26 +53,26 @@ code[class*='language-'] {
   -ms-hyphens: none;
   hyphens: none;
 }
-pre[class*='language-']::selection,
-code[class*='language-']::selection,
-pre[class*='language-']::mozselection,
-code[class*='language-']::mozselection {
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"]::mozselection,
+code[class*="language-"]::mozselection {
   text-shadow: none;
   background: var(--prism-selection-background);
 }
 @media print {
-  pre[class*='language-'],
-  code[class*='language-'] {
+  pre[class*="language-"],
+  code[class*="language-"] {
     text-shadow: none;
   }
 }
-pre[class*='language-'] {
+pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
   background: var(--prism-background);
 }
-:not(pre) > code[class*='language-'] {
+:not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   color: var(--prism-foreground);
@@ -88,7 +82,7 @@ pre[class*='language-'] {
 pre[data-line] {
   position: relative;
 }
-pre[class*='language-'] > code[class*='language-'] {
+pre[class*="language-"] > code[class*="language-"] {
   position: relative;
   z-index: 1;
 }
