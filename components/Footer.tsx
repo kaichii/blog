@@ -1,7 +1,7 @@
-import { host } from '@/lib/config';
-import Link from 'next/link';
-import { Github, RSS, Twitter } from './Icons';
-import styles from './styles.module.css';
+import { host } from "@/lib/config";
+import Link from "next/link";
+import { Github, RSS, Twitter } from "./Icons";
+import styles from "./styles.module.css";
 
 export default function Footer() {
   return (
