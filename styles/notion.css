@@ -7,7 +7,7 @@
   --notion-max-width: 900px;
 }
 
-.notion > * {
+.notion>* {
   padding: 0;
 }
 
@@ -143,7 +143,7 @@
   border-radius: 0.75em;
 }
 
-[data-theme="dark"] .notion-collection-card {
+[data-theme='dark'] .notion-collection-card {
   background: var(--bg-color-1);
 }
 
@@ -157,19 +157,12 @@
   filter: none;
 }
 
-[data-theme="dark"]
-  .notion-collection-card:hover
-  .notion-collection-card-cover {
+[data-theme='dark'] .notion-collection-card:hover .notion-collection-card-cover {
   filter: brightness(120%);
 }
 
 .notion-collection-card:hover .notion-collection-card-cover {
   filter: brightness(90%);
-}
-
-.notion-link {
-  text-decoration: var(--fg-color-2) wavy underline;
-  border-bottom: none;
 }
 
 /** display giscus in aside */
